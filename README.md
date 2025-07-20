@@ -12,3 +12,5 @@ It a smart medicine portal which helps the medical store owner to
 -Check the type of medicine
 <br>
 -Check the price of medicine
+<br>
+-Check the purpose of the medicine
