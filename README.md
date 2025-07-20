@@ -1,5 +1,7 @@
 # MedNetPro
-It a smart medicine portal which helos the medical store owner to
+It allows the user to login with username and password.
+<br>
+It a smart medicine portal which helps the medical store owner to
 <br>
 -Search the medicines
 <br>
