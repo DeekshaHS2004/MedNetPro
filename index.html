@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaithanya Medicals - Management System</title>
+    <link rel="stylesheet" href="styles.css" >
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="logout-btn hidden" onclick="logout()">Logout</button>
+            <h1>🏥 Chaithanya Medicals</h1>
+            <p>No 14/2, Kundalahalli Colony, Kundalahalli-560037</p>
+        </div>
+
+        <div class="content">
+            <!-- Login Form -->
+            <div class="login-form active">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">Owner Login</h2>
+                <form onsubmit="login(event)">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" required placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" required placeholder="Enter your password">
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn">Login</button>
+                    </div>
+                </form>
+                <div style="margin-top: 20px; padding: 15px; background: #e8f4f8; border-radius: 10px; text-align: center;">
+                    <p><strong>Demo Credentials:</strong></p>
+                    <p>Username: admin | Password: admin123</p>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="dashboard">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalMedicines">0</div>
+                        <div class="stat-label">Total Medicines</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #27ae60, #229954);">
+                        <div class="stat-number" id="inStock">0</div>
+                        <div class="stat-label">In Stock</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                        <div class="stat-number" id="lowStock">0</div>
+                        <div class="stat-label">Low Stock</div>
+                    </div>
+                </div>
+
+                <!-- Add Medicine Form -->
+                <div class="medicine-form">
+                    <h3 style="margin-bottom: 20px; color: #2c3e50;">Add New Medicine</h3>
+                    <form onsubmit="addMedicine(event)">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div class="form-group">
+                                <label for="medicineName">Medicine Name:</label>
+                                <input type="text" id="medicineName" required placeholder="Enter medicine name">
+                            </div>
+                            <div class="form-group">
+                                <label for="medicineType">Type:</label>
+                                <select id="medicineType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Tablet">Tablet</option>
+                                    <option value="Capsule">Capsule</option>
+                                    <option value="Syrup">Syrup</option>
+                                    <option value="Injection">Injection</option>
+                                    <option value="Cream">Cream</option>
+                                    <option value="Drops">Drops</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="medicinePrice">Price (₹):</label>
+                                <input type="number" id="medicinePrice" step="0.01" required placeholder="0.00">
+                            </div>
+                            <div class="form-group">
+                                <label for="medicineStock">Stock Quantity:</label>
+                                <input type="number" id="medicineStock" required placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="medicineExpiry">Expiry Date:</label>
+                                <input type="date" id="medicineExpiry" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="medicineManufacturer">Manufacturer:</label>
+                                <input type="text" id="medicineManufacturer" required placeholder="Enter manufacturer">
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button type="submit" class="btn btn-success">Add Medicine</button>
+                            <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Search -->
+                <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search medicines..." onkeyup="searchMedicines()">
+
+                <!-- Medicines Grid -->
+                <div class="medicines-grid" id="medicinesGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Medicine Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 20px; color: #2c3e50;">Edit Medicine</h3>
+            <form onsubmit="updateMedicine(event)">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="editName">Medicine Name:</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editType">Type:</label>
+                    <select id="editType" required>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Capsule">Capsule</option>
+                        <option value="Syrup">Syrup</option>
+                        <option value="Injection">Injection</option>
+                        <option value="Cream">Cream</option>
+                        <option value="Drops">Drops</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editPrice">Price (₹):</label>
+                    <input type="number" id="editPrice" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="editStock">Stock Quantity:</label>
+                    <input type="number" id="editStock" required>
+                </div>
+                <div class="form-group">
+                    <label for="editExpiry">Expiry Date:</label>
+                    <input type="date" id="editExpiry" required>
+                </div>
+                <div class="form-group">
+                    <label for="editManufacturer">Manufacturer:</label>
+                    <input type="text" id="editManufacturer" required>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button type="submit" class="btn btn-success">Update Medicine</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
