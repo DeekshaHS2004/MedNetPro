@@ -498,6 +498,10 @@
                         <span class="info-label">Manufacturer</span>
                         <span class="info-value">${medicine.manufacturer}</span>
                     </div>
+                    <div class="info-item" style="grid-column: 1 / -1; margin-top: 10px;">
+                        <span class="info-label">Purpose</span>
+                        <span class="info-value">${medicine.purpose}</span>
+                    </div>
                     <div class="card-actions">
                         <button class="btn btn-success" onclick="editMedicine(${medicine.id})">Edit</button>
                         <button class="btn btn-danger" onclick="deleteMedicine(${medicine.id})">Delete</button>
