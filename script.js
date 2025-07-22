@@ -1,10 +1,10 @@
 
-        // In-memory storage for medicines
-        let medicines = [];
-        let nextId = 1;
+// In-memory storage for medicines
+let medicines = [];
+let nextId = 1;
 
-        // Sample medicine data
-        const sampleMedicines = [
+// Sample medicine data
+const sampleMedicines = [
   { name: "Amoxicillin", type: "Syrup", price: 130.13, stock: 488, expiry: "2026-10-08", manufacturer: "Cipla", purpose: "Fever reduction" },
   { name: "Clotrimazole", type: "Injection", price: 110.06, stock: 209, expiry: "2026-06-08", manufacturer: "Dr. Reddy's", purpose: "Acid reduction" },
   { name: "Azithromycin", type: "Tablet", price: 73.42, stock: 394, expiry: "2026-09-18", manufacturer: "Novartis", purpose: "Thyroid regulation" },
